@@ -14,6 +14,9 @@ environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916.38243
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916.382430127/GCC4MBED_TYPE/delimiter=;
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916.382430127/GCC4MBED_TYPE/operation=append
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916.382430127/GCC4MBED_TYPE/value=Debug
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916.382430127/GCOVFLAG/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916.382430127/GCOVFLAG/operation=append
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916.382430127/GCOVFLAG/value=-ftest-coverage -fprofile-arcs
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916.382430127/GPFLAGS/delimiter=;
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916.382430127/GPFLAGS/operation=append
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916.382430127/GPFLAGS/value=-DRTS_SIMULATION
@@ -34,6 +37,9 @@ environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916/CYGWI
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916/GCC/delimiter=;
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916/GCC/operation=replace
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916/GCC/value=gcc
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916/GCOVFLAG/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916/GCOVFLAG/operation=append
+environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916/GCOVFLAG/value=-ftest-coverage -fprofile-arcs
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916/GPFLAGS/delimiter=;
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916/GPFLAGS/operation=append
 environment/project/cdt.managedbuild.config.gnu.cross.exe.debug.1255715916/GPFLAGS/value=-DRTS_SIMULATION
