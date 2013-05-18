@@ -5,6 +5,7 @@
 
 char Text[1000];
 int Stop=0;
+void __gcov_flush(void);
 
 void Wait()
 {
@@ -31,4 +32,9 @@ void Write(char *p, const char *string)
 
 void Reset()
 {
+}
+
+void Flush()
+{
+	__gcov_flush();
 }

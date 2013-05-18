@@ -1,4 +1,4 @@
-require "EmptyProject"
+require "../EmptyProject"
 EmptyProject.Wait
 EmptyProject.Reset
 

@@ -19,4 +19,13 @@ Feature: EmptyProject
 		| A | B | Diff |
 		| 5 | 3 | 2 |
 		| 5 | 4 | 1 |
+
+	Scenario Outline: End
+		Given Operation <Oper>
+		Then Flush Data	
+
+		Examples:
+		| Oper |
+		| End |
 		
+	
