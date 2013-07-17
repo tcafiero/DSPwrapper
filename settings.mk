@@ -1,5 +1,4 @@
 ProjName ?= dsp
-EXTENSION ?= dll
 
 ifeq "$(EXTENSION)"  "dll"
 KIND = -shared
@@ -7,14 +6,6 @@ else
 KIND =
 endif
 
-
-REMOVE = rm
-QUIET=> /dev/null 2>&1 ; exit 0
-FixPath = $(subst \,/,$1)
-
-
-GCC ?= i686-pc-mingw32-gcc
-GPP ?= i686-pc-mingw32-g++
 
 OPTIMIZATION ?= -O0
 DBG ?= -g
@@ -24,10 +15,33 @@ GPFLAGS ?= $(DBG) -Wall $(OPTIMIZATION)
 GPFLAGS += -I./sharedobjects
 GCFLAGS = $(GPFLAGS)
 
+# switches for ruby or java wrapping
 #OTHERSSWITCHES ?= -Wl,--enable-auto-image-base,--enable-auto-import,--export-all   -lruby  -lrt -ldl -lcrypt
 OTHERSSWITCHES ?= -mno-cygwin -Wl,--add-stdcall-alias
-#INSTALLDIR ?= /usr/lib/ruby/site_ruby/1.8/i386-cygwin
 
 
-INSTALL ?= /usr/bin/install
-INSTALLSWITCHES ?= -c -m 0755
+
+.PHONY: all clean deploy
+
+all:: $(ProjName).$(EXTENSION)
+
+$(ProjName).$(EXTENSION): $(OBJ) $(WRAPPEROBJS) $(SHRDOBJS)
+	$(GCC) $(GCOVFLAGS) $(KIND) $(OBJS) $(WRAPPEROBJS) $(SHRDOBJS) $(OTHERSSWITCHES) -o $@
+#	$(INSTALL) $(INSTALLSWITCHES) $@ $(INSTALLDIR) 
+
+clean:
+	find . -name "*.gcno" -print0 | xargs -0 rm -rf
+	find . -name "*.gcda" -print0 | xargs -0 rm -rf
+	find . -name "*.o" -print0 | xargs -0 rm -rf
+	find . -name "*.exe" -print0 | xargs -0 rm -rf
+	find . -name "*.so" -print0 | xargs -0 rm -rf
+	find . -name "*.java" -print0 | xargs -0 rm -rf
+	find . -name "*.dll" -print0 | xargs -0 rm -rf
+
+
+%.o : %.cpp
+	$(GPP) $(GCOVFLAG) $(GPFLAGS) -c $< -o $@
+
+%.o : %.c
+	$(GCC) $(GCOVFLAG) $(GCFLAGS) -c $< -o $@
+
