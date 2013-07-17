@@ -16,7 +16,7 @@ LIBS_SUFFIX=
 
 ifdef CYGWIN_SIMULATOR
 SHELL = c:/cygwin/bin/sh.exe
-include $(GCC4MBED_DIR)/build/cygwin.mk
+include ./settings.mk ./sharedobjects/makefile.mk ./src/wrappers/makefile.mk ./cygwin.mk
 else
 include $(GCC4MBED_DIR)/build/gcc4mbed.mk
 endif
