@@ -92,7 +92,7 @@ environment/project/cdt.managedbuild.toolchain.gnu.cross.base.730580341.68054139
 environment/project/cdt.managedbuild.toolchain.gnu.cross.base.730580341.680541395/append=true
 environment/project/cdt.managedbuild.toolchain.gnu.cross.base.730580341.680541395/appendContributed=true
 environment/project/cdt.managedbuild.toolchain.gnu.cross.base.730580341/CYGWIN_SIMULATOR/delimiter=;
-environment/project/cdt.managedbuild.toolchain.gnu.cross.base.730580341/CYGWIN_SIMULATOR/operation=append
+environment/project/cdt.managedbuild.toolchain.gnu.cross.base.730580341/CYGWIN_SIMULATOR/operation=remove
 environment/project/cdt.managedbuild.toolchain.gnu.cross.base.730580341/CYGWIN_SIMULATOR/value=1
 environment/project/cdt.managedbuild.toolchain.gnu.cross.base.730580341/append=true
 environment/project/cdt.managedbuild.toolchain.gnu.cross.base.730580341/appendContributed=true

@@ -23,9 +23,21 @@ all:: $(COMPONENTLIB) $(WRAPPERLIB)
 
 $(COMPONENTLIB): $(SHRDOBJS)
 	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(SHRDOBJS) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
+	@echo NOTICE
+	@echo NOTICE
+	@echo NOTICE remember to copy $(COMPONENTLIB) into sysroot/usr/lib or sysroot/lib on the target system
+	@echo NOTICE example for RaspberryPI cp $(COMPONENTLIB) /usr/lib/
+	@echo NOTICE
+	@echo NOTICE
 
 $(WRAPPERLIB): $(WRAPPEROBJS) $(COMPONENTLIB)
-	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(WRAPPEROBJS) $(SHRDOBJS) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
+	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(WRAPPEROBJS) $(COMPONENTLIB) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
+	@echo NOTICE
+	@echo NOTICE
+	@echo NOTICE remember to copy $(WRAPPERLIB) into sysroot/usr/lib or sysroot/lib on the target system
+	@echo NOTICE example for RaspberryPI cp $(WRAPPERLIB) /usr/lib/
+	@echo NOTICE
+	@echo NOTICE
 
 
 

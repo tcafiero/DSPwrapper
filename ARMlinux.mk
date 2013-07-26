@@ -19,14 +19,8 @@ JDK_PATH ?= .
 
 # switches for ruby or java wrapping
 #OTHERSSWITCHES ?= -Wl,--enable-auto-image-base,--enable-auto-import,--export-all   -lruby  -lrt -ldl -lcrypt
-# seguono prove varie
-#OTHERSSWITCHES ?= -lc -lrt
-#OTHERSSWITCHES ?= -G
-#OTHERSSWITCHES ?= -lc -lgcc
-#LD_FLAGS ?= -mtls-dialect=gnu -nodefaultlibs -nostdlib -shared-libgcc -Wl,-nostdlib -Wl,-call_shared -Wl,--dynamic-linker=/etc/libc/lib/ld-linux.so.3
-#LD_FLAGS ?= -static-libgcc
 
-EXTRA_GPFLAGS = -mfloat-abi=hard -nodefaultlibs -nostdlib -shared-libgcc
+EXTRA_GPFLAGS = -mfloat-abi=hard -static-libgcc -lc -lgcc
 LD_FLAGS = 
 
 REMOVE = rm
