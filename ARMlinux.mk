@@ -1,4 +1,5 @@
-TOOL_PREFIX ?= arm-none-linux-gnueabi
+#TOOL_PREFIX ?= arm-none-linux-gnueabi
+TOOL_PREFIX ?=  /cygdrive/c/HolisticSystems/mbed/gcc-arm-none-eabi/bin/arm-none-eabi
 GCC = $(TOOL_PREFIX)-gcc
 GPP = $(TOOL_PREFIX)-g++
 LD = $(TOOL_PREFIX)-gcc
@@ -18,11 +19,15 @@ JDK_PATH ?= .
 
 # switches for ruby or java wrapping
 #OTHERSSWITCHES ?= -Wl,--enable-auto-image-base,--enable-auto-import,--export-all   -lruby  -lrt -ldl -lcrypt
-OTHERSSWITCHES ?= 
+# seguono prove varie
+#OTHERSSWITCHES ?= -lc -lrt
 #OTHERSSWITCHES ?= -G
 #OTHERSSWITCHES ?= -lc -lgcc
+#LD_FLAGS ?= -mtls-dialect=gnu -nodefaultlibs -nostdlib -shared-libgcc -Wl,-nostdlib -Wl,-call_shared -Wl,--dynamic-linker=/etc/libc/lib/ld-linux.so.3
+#LD_FLAGS ?= -static-libgcc
 
-LD_FLAGS ?= -mtls-dialect=gnu -nodefaultlibs -nostdlib -shared-libgcc -Wl,-nostdlib -Wl,-call_shared -Wl,--dynamic-linker=/etc/libc/lib/ld-linux.so.3
+EXTRA_GPFLAGS = -mfloat-abi=hard -nodefaultlibs -nostdlib -shared-libgcc
+LD_FLAGS = 
 
 REMOVE = rm
 QUIET=> /dev/null 2>&1 ; exit 0

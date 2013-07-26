@@ -6,7 +6,7 @@ DBG ?= -g
 #GCOVFLAGS ?= -ftest-coverage -fprofile-arcs
 GCOVFLAGS ?= 
 OBJS =
-GPFLAGS ?= $(DBG) -Wall $(OPTIMIZATION)
+GPFLAGS ?= $(DBG) -Wall $(OPTIMIZATION) $(EXTRA_GPFLAGS)
 GPFLAGS += $(call FixPath,-I./sharedobjects)
 GCFLAGS = $(GPFLAGS)
 INSTALL ?= /usr/bin/install
@@ -17,11 +17,16 @@ INSTALLSWITCHES ?= -c -m 0755
 
 .PHONY: all clean deploy
 
-all:: $(LIB_PREFIX)$(ProjName).$(LIB_SUFFIX)
+all:: $(COMPONENTLIB) $(WRAPPERLIB)
 
-$(LIB_PREFIX)$(ProjName).$(LIB_SUFFIX): $(OBJ) $(WRAPPEROBJS) $(SHRDOBJS)
-	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(OBJS) $(WRAPPEROBJS) $(SHRDOBJS) $(OTHERSSWITCHES) -o $@
 #	$(INSTALL) $(INSTALLSWITCHES) $@ $(INSTALLDIR) 
+
+$(COMPONENTLIB): $(SHRDOBJS)
+	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(SHRDOBJS) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
+
+$(WRAPPERLIB): $(WRAPPEROBJS) $(COMPONENTLIB)
+	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(WRAPPEROBJS) $(SHRDOBJS) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
+
 
 
 clean:
@@ -36,8 +41,8 @@ clean:
 	find . -name "*_wrap.c" -print0 | xargs -0 rm -rf
 
 %.o : %.cpp
-	$(GPP) $(GCOVFLAG) $(GPFLAGS) -c $< -o $@
+	$(GPP) $(GCOVFLAG) $(GPFLAGS) $(OTHERSSWITCHES) -c $< -o $@
 
 %.o : %.c
-	$(GCC) $(GCOVFLAG) $(GCFLAGS) -c $< -o $@
+	$(GCC) $(GCOVFLAG) $(GCFLAGS) $(OTHERSSWITCHES) -c $< -o $@
 

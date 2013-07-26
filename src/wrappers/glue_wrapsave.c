@@ -84,7 +84,7 @@
 #endif
 
 #ifndef SWIGEXPORT
-# if defined(_WIN32) || defined(__WIN32__) || defined(__CYGWIN__)
+# if defined(_WIN32) || defined(__WIN32__) || defined(__WIN32__)
 #   if defined(STATIC_LINKED)
 #     define SWIGEXPORT
 #   else

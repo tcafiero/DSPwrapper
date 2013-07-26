@@ -17,11 +17,12 @@ JDK_PATH = /cygdrive/c/Programmi/Java/jdk1.7.0_25
 
 # switches for ruby or java wrapping
 #OTHERSSWITCHES ?= -Wl,--enable-auto-image-base,--enable-auto-import,--export-all   -lruby  -lrt -ldl -lcrypt
-OTHERSSWITCHES ?= -Wl,--add-stdcall-alias
+#OTHERSSWITCHES ?= -Wl,--add-stdcall-alias
 #OTHERSSWITCHES ?= -G
 #OTHERSSWITCHES ?= -lc -lgcc
 
-LD_FLAGS = 
+LD_FLAGS = -Wl,--add-stdcall-alias
+EXTRA_GPFLAGS = 
 
 REMOVE = rm
 QUIET=> /dev/null 2>&1 ; exit 0

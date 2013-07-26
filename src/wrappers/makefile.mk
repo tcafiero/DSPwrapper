@@ -2,6 +2,7 @@ T432 = $(wildcard ./src/wrappers/*.i)
 JAVA_FILES = ./src/wrappers/*.java
 WRAPPEROBJS = $(patsubst %.i,%_wrap.o,$(T432))
 SHAREDINCLUDE ?= $(call FixPath,-I./sharedobjects)
+WRAPPERLIB = $(LIB_PREFIX)$(ProjName).$(LIB_SUFFIX)
 
 
 
@@ -19,3 +20,4 @@ ifeq "$(OS_TARGET)" "linux"
 endif
 	cp -f $(basename $<).c $(basename $<)save.c
 	$(GCC) $(GCOVFLAG) $(DBG) -Wall $(OPTIMIZATION) $(GCFLAGS) -pipe -fno-strict-aliasing $(TESTFLAG) $(SWIGINCLUDE) $(SHAREDINCLUDE) -c $< -o $@
+	
