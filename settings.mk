@@ -17,21 +17,22 @@ INSTALLSWITCHES ?= -c -m 0755
 
 .PHONY: all clean deploy
 
-all:: $(COMPONENTLIB) $(WRAPPERLIB)
+all:: $(DSP_IMP_TEMPLATE_LIB) $(WRAPPERLIB)
 
 #	$(INSTALL) $(INSTALLSWITCHES) $@ $(INSTALLDIR) 
 
-$(COMPONENTLIB): $(SHRDOBJS)
-	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(SHRDOBJS) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
-	@echo NOTICE
-	@echo NOTICE
-	@echo NOTICE remember to copy $(COMPONENTLIB) into sysroot/usr/lib or sysroot/lib on the target system
-	@echo NOTICE example for RaspberryPI cp $(COMPONENTLIB) /usr/lib/
-	@echo NOTICE
-	@echo NOTICE
+$(DSP_IMP_TEMPLATE_LIB): $(SHRDOBJS)
+#	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(SHRDOBJS) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
+#	@echo NOTICE
+#	@echo NOTICE
+#	@echo NOTICE
+#	@echo NOTICE remember to copy $(COMPONENTLIB) into sysroot/usr/lib or sysroot/lib on the target system
+#	@echo NOTICE example for RaspberryPI cp $(COMPONENTLIB) /usr/lib/
+#	@echo NOTICE
+#	@echo NOTICE
 
-$(WRAPPERLIB): $(WRAPPEROBJS) $(COMPONENTLIB)
-	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(WRAPPEROBJS) $(COMPONENTLIB) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
+$(WRAPPERLIB): $(WRAPPEROBJS) $(wildcard ./sharedobjects/$(DSP_IMP_TEMPLATE_LIB))
+	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(WRAPPEROBJS) $(wildcard ./sharedobjects/$(DSP_IMP_TEMPLATE_LIB)) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
 	@echo NOTICE
 	@echo NOTICE
 	@echo NOTICE remember to copy $(WRAPPERLIB) into sysroot/usr/lib or sysroot/lib on the target system

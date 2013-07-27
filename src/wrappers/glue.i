@@ -1,7 +1,7 @@
 %module dsp
 
 %{
-#include "libdirana.h"
+#include "DSPinterface.h"
 %}
 
 typedef enum {

@@ -5,7 +5,7 @@
  *      Author: user
  */
 
-#include "libdirana.h"
+#include "DSPinterface.h"
 #include <stdio.h>
 
 /* library APIs  declarations */
