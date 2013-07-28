@@ -1,1 +1,1 @@
-cp -f c:\windows\system\ll_DSPimplementation.dll.save c:\windows\system\ll_DSPimplementation.dll
+cp -f /cygdrive/c/windows/system/DSPimplementation.dll.save /cygdrive/c/windows/system/DSPimplementation.dll

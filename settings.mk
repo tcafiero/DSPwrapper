@@ -17,7 +17,7 @@ INSTALLSWITCHES ?= -c -m 0755
 
 .PHONY: all clean deploy
 
-all:: $(DSP_IMP_TEMPLATE_LIB) $(WRAPPERLIB)
+all:: $(DSP_IMP_TEMPLATE_LIB) $(WRAPPERLIB) 
 
 #	$(INSTALL) $(INSTALLSWITCHES) $@ $(INSTALLDIR) 
 
@@ -31,12 +31,12 @@ $(DSP_IMP_TEMPLATE_LIB): $(SHRDOBJS)
 #	@echo NOTICE
 #	@echo NOTICE
 
-$(WRAPPERLIB): $(WRAPPEROBJS) $(wildcard ./sharedobjects/$(DSP_IMP_TEMPLATE_LIB))
-	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(WRAPPEROBJS) $(wildcard ./sharedobjects/$(DSP_IMP_TEMPLATE_LIB)) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
+$(WRAPPERLIB): $(WRAPPEROBJS) $(SHRDOBJS)
+	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(WRAPPEROBJS) -L./lib -l$(DSP_IMP_TEMPLATE) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o ./lib/$(notdir $@)
 	@echo NOTICE
 	@echo NOTICE
-	@echo NOTICE remember to copy $(WRAPPERLIB) into sysroot/usr/lib or sysroot/lib on the target system
-	@echo NOTICE example for RaspberryPI cp $(WRAPPERLIB) /usr/lib/
+	@echo NOTICE remember to copy ./lib/$(notdir $@) into sysroot/usr/lib or sysroot/lib on the target system
+	@echo NOTICE example for RaspberryPI cp ./lib/$(notdir $@) /usr/lib/
 	@echo NOTICE
 	@echo NOTICE
 

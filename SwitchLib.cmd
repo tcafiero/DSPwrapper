@@ -1,2 +1,2 @@
-cp -f c:\windows\system\ll_DSPimplementation.dll c:\windows\system\ll_DSPimplementation.dll.save
-cp -f c:\windows\system\ll_dirana.dll c:\windows\system\ll_DSPimplementation.dll
+cp -f /cygdrive/c/windows/system/DSPimplementation.dll /cygdrive/c/windows/system/DSPimplementation.dll.save
+cp -f /cygdrive/c/windows/system/dirana.dll /cygdrive/c/windows/system/DSPimplementation.dll
