@@ -3,9 +3,10 @@
 /*****   Akhela                  **********************/
 /******************************************************/
 
-#ifndef LIBDIRANA_H
-#define LIBDIRANA_H
+#ifndef DSPINTERFACE_H
+#define DSPINTERFACE_H
 
+#include <stdint.h>
 #include <unistd.h>
 
 /* library types definitions  */
@@ -73,8 +74,8 @@ typedef enum {
 
 union USUC
 {
-  unsigned short us;                                            
-  unsigned char uc[2];
+  uint16_t us;
+  uint8_t uc[2];
 };
 
 

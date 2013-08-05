@@ -1,7 +1,7 @@
 DSP_IMP_TEMPLATE = DSPimplementation
 DSP_IMP_TEMPLATE_LIB = $(LIB_PREFIX)$(DSP_IMP_TEMPLATE).$(LIB_SUFFIX)
 T1234 = $(wildcard ./sharedobjects/*.c)
-SHRDOBJS = $(patsubst %.c,%.$(LIB_SUFFIX),$(T1234))
+SHRDOBJS = $(patsubst %.c,%.$(LIB_SUFFIX),$(T1234)) 
 
 %.$(LIB_SUFFIX) : %.c
 	$(GCC) $(GCOVFLAG) $(GCFLAGS) $(OTHERSSWITCHES) -c $< -o $(basename $<).o

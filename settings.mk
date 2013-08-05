@@ -8,6 +8,7 @@ GCOVFLAGS ?=
 OBJS =
 GPFLAGS ?= $(DBG) -Wall $(OPTIMIZATION) $(EXTRA_GPFLAGS)
 GPFLAGS += $(call FixPath,-I./sharedobjects)
+GPFLAGS += $(call FixPath,-I./sharedobjects/submodules/includes)
 GCFLAGS = $(GPFLAGS)
 INSTALL ?= /usr/bin/install
 INSTALLSWITCHES ?= -c -m 0755
@@ -17,9 +18,13 @@ INSTALLSWITCHES ?= -c -m 0755
 
 .PHONY: all clean deploy
 
-all:: $(DSP_IMP_TEMPLATE_LIB) $(WRAPPERLIB) 
+all:: $(DSP_IMP_TEMPLATE_LIB) $(WRAPPERLIB) ./lib/libdirana.so
 
 #	$(INSTALL) $(INSTALLSWITCHES) $@ $(INSTALLDIR) 
+
+./lib/libdirana.so: $(SUBMODULES)
+	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(SUBMODULES) -L./lib -l$(DSP_IMP_TEMPLATE) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
+
 
 $(DSP_IMP_TEMPLATE_LIB): $(SHRDOBJS)
 #	$(LD) $(LD_FLAGS) $(GCOVFLAGS) $(KIND) $(SHRDOBJS) $(OTHERSSWITCHES) $(EXTRA_GPFLAGS) -o $@
