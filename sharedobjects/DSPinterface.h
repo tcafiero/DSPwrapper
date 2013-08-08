@@ -9,6 +9,7 @@
 #include <stdint.h>
 #include <unistd.h>
 
+
 /* library types definitions  */
 
 typedef enum {
@@ -137,6 +138,9 @@ STATUS setSource(DR_AUDIO_SOURCES_TYPES p_source );
 STATUS getSource(DR_AUDIO_SOURCES_TYPES *p_source);
 STATUS setVolume(int p_volume);
 STATUS getVolume(int *p_volume);
+STATUS SetBalance( int8_t p_balance );
+STATUS SetFader( int8_t p_fader );
+STATUS SetLoudness( uint8_t p_loudness );
 //STATUS getStatus(DR_DSP_STATUS *p_status);
 STATUS setChannelGain(AMPLI_CHANNEL p_channel, AMPLI_GAINS p_gain);
 STATUS getChannelGain(AMPLI_CHANNEL p_channel, AMPLI_GAINS *p_gain);
