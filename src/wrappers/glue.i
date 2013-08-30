@@ -1,10 +1,13 @@
 %module dsp
 
 %{
-#include "DSPinterface.h"
+#include "libDSP.h"
 %}
 
-typedef enum {
+%include "enumtypeunsafe.swg"
+%javaconst(1);
+
+enum DR_AUDIO_SOURCES{
    SRC_NO_SOURCE,
    SRC_TUNER,
    SRC_CD,
@@ -17,143 +20,192 @@ typedef enum {
    SRC_TTS_ON_AUX,
    SRC_AUX_CONVERGENCE,
    SRC_MAX_AUDIO_SOURCES
-
-}  DR_AUDIO_SOURCES_TYPES;
+};
 
 /*
-typedef enum {
-
+enum  DR_DSP_STATUS{
    ON,
    OFF,
    DR_ERROR
-
-}  DR_DSP_STATUS;
+};
 */
 
 
-typedef enum {
+enum AMP_STATUS{
 
    AMP_ON,
    AMP_OFF
-}  AMP_STATUS;
+};
 
 
 
-typedef enum {
+enum STATUS{
 
    ERROR,
    OK
-}  STATUS;
+};
 
 
-typedef enum {
+enum AMPLI_CHANNEL{
 
    AMP_NO_CHANNEL,
    AMP_FRONT_CHANNEL,
    AMP_REAR_CHANNEL,
    AMP_END_CHANNEL
 
-} AMPLI_CHANNEL;
+};
 
 
-typedef enum {
+enum AMPLI_GAINS{
    NO_GAIN,
    LOW_GAIN12,
    HIGH_GAIN26,
    END_GAIN
 
-} AMPLI_GAINS;
-
-
-union USUC
-{
-  unsigned short us;                                            
-  unsigned char uc[2];
 };
 
 
-typedef enum
+
+enum TYPE_BAND
 {
 	FM_BAND,
 	AM_BAND
-}TYPE_BAND;
+};
 
-typedef enum
+enum TYPE_SUB_BAND
 {
 	AM_MW_BAND,
 	AM_KW_BAND
-}TYPE_SUB_BAND;
+};
 
-
-typedef struct
-{
-  /* IF Filter center frequency */   /* 1 bytes */
-  int FM_IF_Filter_Center_Freq_Main_tuner;
-  int AM_IF_Filter_Center_Freq_Main_tuner;
-  int FM_IF_Filter_Center_Freq_Sub_tuner;
-  int AM_IF_Filter_Center_Freq_Sub_tuner;
-  /* Offset alignment */   /* 3 bytes */
-  int FM_Offset_Main_tuner_Europe_H;
-  int FM_Offset_Main_tuner_Europe_L;
-  int FM_Offset_Main_tuner_Japan_H;
-  int FM_Offset_Main_tuner_Japan_L;
-  int MW_Offset_tuner_Europe_H;
-  int MW_Offset_tuner_Europe_L;
-  int KW_Offset_tuner_H;
-  int KW_Offset_tuner_L;
-  int MW_Offset_tuner_USA_H;
-  int MW_Offset_tuner_USA_L;
-  /* Level alignment */   /* 2 bytes */
-  int FM_Level_Main_tuner;
-  int FM_Level_Sub_tuner;
-  int FM_Level_Main_tuner_Japan;
-  int FM_Level_Sub_tuner_Japan;
-  int MW_Level_Main_tuner;
-  int MW_Level_Sub_tuner;
-  int KW_Level_Main_tuner;
-  int KW_Level_Sub_tuner;
-  /* Stereo decoder */   /* 2 bytes */
-  int FM_Stereo_decoder;
-  /* free RESERVED */   /* 5 bytes */
-  /* CheckSum */   /* 1 byte */
-}  DIRANA_ALIGNMENT_TYPE;
-
+%inline %{
 int g_current_volume;
+%}
 
 #define VOLUMEINDBTABLE  121
 #define MAXVOLSTEP 30 + 1
 
 
-/* library APIs  declarations */
-extern STATUS initDirana(void);
-extern STATUS setSource(DR_AUDIO_SOURCES_TYPES p_source );
-extern STATUS getSource(DR_AUDIO_SOURCES_TYPES *p_source);
-extern STATUS setVolume(int p_volume);
-extern STATUS getVolume(int *p_volume);
-extern STATUS SetBalance( int8_t p_balance );
-extern STATUS SetFader( int8_t p_fader );
-extern STATUS SetLoudness( uint8_t p_loudness );
-//STATUS getStatus(DR_DSP_STATUS *p_status);
-extern STATUS setChannelGain(AMPLI_CHANNEL p_channel, AMPLI_GAINS p_gain);
-extern STATUS getChannelGain(AMPLI_CHANNEL p_channel, AMPLI_GAINS *p_gain);
-extern STATUS playSin(int p_volume);
-extern STATUS doMute(void);
-extern STATUS doDeMute(void);
+extern bool initDSP(void);
 
-extern STATUS change_band(TYPE_BAND p_new_band);
-extern void get_band(TYPE_BAND p_band, TYPE_SUB_BAND p_subband);
-extern STATUS set_frequency(int p_frequency, TYPE_BAND p_band, TYPE_SUB_BAND p_subAM_band);
+/*
+ *  bool dspEnd(void)
+ *  @brief: close device i2c to disconnect the DSP
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool dspEnd();
+
+
+/*
+ *  bool setVolume(int p_volume )
+ *  @brief: set volume between 0 and 30 unit.
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool setVolume(int p_volume);
+
+/*
+ *  bool getVolume(int *p_volume )
+ *  @brief: get volume between 0 and 30 unit.
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool getVolume(int *p_volume);
+
+/*
+ *  bool increase_Volume()
+ *  @brief: increase_Volume.
+ *  @return: 1 if OK, 0 otherwise
+*/
+
+extern bool increase_Volume();
+/*
+ *  bool decrease_Volume)
+ *  @brief: decrease_Volume.
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool decrease_Volume();
+
+/*
+ *  bool doMute(void)
+ *  @brief: mute audio sources.
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool doMute(void);
+
+/*
+ *  bool doMute(void)
+ *  @brief: demute audio sources.
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool doDeMute(void);
+
+/*
+ *  bool SetBalance(void)
+ *  @brief: SetBalance audio value between  [-11/+11].
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool SetBalance( int p_balance );
+
+/*
+ *  bool SetFader(void)
+ *  @brief: SetFader audio value between  [-11/+11].
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool SetFader( int p_fader );
+
+/*
+ *  bool SetLoudness(void)
+ *  @brief: enable or disable audio Loudness.
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool SetLoudness( int p_loudness );
+
+/*
+ *  bool setSource(int p_source )
+ *  @brief: select and connect a new audio source 
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool setSource(int p_source );
+
+/*
+ *  bool getSource(int *p_source )
+ *  @brief: get current audible audio source
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool getSource(int *p_source);
+
+/*
+ *  bool playSin(int p_volume )
+ *  @brief: play a sin with setted volume amplitude.
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool playSin(int p_volume,int p_frequency, bool p_enable);
+
+/*
+ *  bool change_band(int p_new_band)
+ *  @brief: change band (write on Tuner device).
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool change_band(int p_new_band);
+
+/*
+ *  bool get_band(int p_new_band)
+ *  @brief: get current band (read on Tuner device).
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern void get_band(int p_band, int p_subband);
+
+/*
+ *  bool set_frequency(int p_frequency, int p_band, int p_subAM_band)
+ *  @brief: set a frequency in to related band and subband (write on Tuner device).
+ *  @return: 1 if OK, 0 otherwise
+*/
+extern bool set_frequency(int p_frequency, int p_band, int p_subAM_band);
+
+
+/*
+ *  bool set_frequency(int p_frequency, int p_band, int p_subAM_band)
+ *  @brief: get current frequency (read on Tuner device).
+ *  @return: int current frequency
+*/
 extern int get_frequency();
 
-extern STATUS set_LeafDiceCfg(int p_freq, TYPE_BAND p_band, TYPE_SUB_BAND p_subAM_band);
-extern STATUS get_Freq_Band_fromTuner(int *p_freq, TYPE_BAND *p_band, TYPE_SUB_BAND *p_subband);
-
-
-/* main functions */
-extern STATUS setSourceAUX();
-extern STATUS SetAuxOnPrimaryStereo();
-extern STATUS SetTunerOnPrimaryStereo();
-extern STATUS SetI2SOnPrimaryStereo();
-extern STATUS SetCdcOnPrimaryStereo();
-extern STATUS SetPhoneOnPrimaryStereo();
-///******************************///

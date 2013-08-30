@@ -5,150 +5,97 @@
  *      Author: user
  */
 
-#include "DSPinterface.h"
+#include "libDSP.h"
 #include <stdio.h>
 
 /* library APIs  declarations */
-STATUS initDirana(void)
+bool initDSP(void)
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
 
-STATUS setSource(DR_AUDIO_SOURCES_TYPES p_source )
+bool setSource(AUDIO_SOURCES_TYPES p_source )
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
-}
-
-
-STATUS getSource(DR_AUDIO_SOURCES_TYPES *p_source)
-{
-	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
 
 
-STATUS setVolume(int p_volume)
+bool getSource(AUDIO_SOURCES_TYPES *p_source)
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
 
 
-STATUS getVolume(int *p_volume)
+bool setVolume(int p_volume)
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
+}
+
+
+bool getVolume(int *p_volume)
+{
+	printf("Function Activated: %s\n",__func__);
+	return true;
 }
 
 
 //STATUS getStatus(DR_DSP_STATUS *p_status);
-STATUS setChannelGain(AMPLI_CHANNEL p_channel, AMPLI_GAINS p_gain)
+bool setChannelGain(int p_channel, int p_gain)
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
 
-STATUS getChannelGain(AMPLI_CHANNEL p_channel, AMPLI_GAINS *p_gain)
+bool getChannelGain(int p_channel, int *p_gain)
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
 
-STATUS playSin(int p_volume)
+bool playSin(int p_volume,int p_frequency, bool p_enable)
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
 
-STATUS doMute(void)
+bool doMute(void)
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
 
-STATUS doDeMute(void)
+bool doDeMute(void)
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
 
 
-STATUS change_band(TYPE_BAND p_new_band)
+bool change_band(char p_new_band)
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
 
-void get_band(TYPE_BAND p_band, TYPE_SUB_BAND p_subband)
+void get_band(char p_band, char p_subband)
 {
 	printf("Function Activated: %s\n",__func__);
 }
 
-STATUS set_frequency(int p_frequency, TYPE_BAND p_band, TYPE_SUB_BAND p_subAM_band)
+bool set_frequency(int p_frequency, char p_band, char p_subAM_band)
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
 
 int get_frequency()
 {
 	printf("Function Activated: %s\n",__func__);
-	return OK;
+	return true;
 }
-
-
-STATUS set_LeafDiceCfg(int p_freq, TYPE_BAND p_band, TYPE_SUB_BAND p_subAM_band)
-{
-	printf("Function Activated: %s\n",__func__);
-	return OK;
-}
-
-STATUS get_Freq_Band_fromTuner(int *p_freq, TYPE_BAND *p_band, TYPE_SUB_BAND *p_subband)
-{
-	printf("Function Activated: %s\n",__func__);
-	return OK;
-}
-
-
-
-/* main functions */
-STATUS setSourceAUX()
-{
-	printf("Function Activated: %s\n",__func__);
-	return OK;
-}
-
-STATUS SetAuxOnPrimaryStereo()
-{
-	printf("Function Activated: %s\n",__func__);
-	return OK;
-}
-
-STATUS SetTunerOnPrimaryStereo()
-{
-	printf("Function Activated: %s\n",__func__);
-	return OK;
-}
-
-STATUS SetI2SOnPrimaryStereo()
-{
-	printf("Function Activated: %s\n",__func__);
-	return OK;
-}
-
-STATUS SetCdcOnPrimaryStereo()
-{
-	printf("Function Activated: %s\n",__func__);
-	return OK;
-}
-
-STATUS SetPhoneOnPrimaryStereo()
-{
-	printf("Function Activated: %s\n",__func__);
-	return OK;
-}
-
 
 
